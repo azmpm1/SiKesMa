@@ -17,10 +17,10 @@
                 <a href="/" class="text-4xl font-bold">SiKesMa</a>
 
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="#" class="hover:text-gray-300 text-xl">Ambil Antrian</a>
-                    <a href="#" class="hover:text-gray-300 text-xl">Profil Dokter</a>
-                    <a href="#" class="hover:text-gray-300 text-xl">Ambulance</a>
-                    <a href="#" class="hover:text-gray-300 text-xl">Artikel Kesehatan</a>
+                    <a href="{{ route('login') }}" class="hover:text-gray-300 text-xl">Ambil Antrian</a>
+                    <a href="{{ route('login') }}" class="hover:text-gray-300 text-xl">Profil Dokter</a>
+                    <a href="{{ route('login') }}" class="hover:text-gray-300 text-xl">Ambulance</a>
+                    <a href="{{ route('login') }}" class="hover:text-gray-300 text-xl">Artikel Kesehatan</a>
                     @if (Route::has('register'))
                         <a href="{{ route('register') }}" class="bg-[#a5e143] text-black text-xl font-semibold py-2 px-4 rounded-lg hover:bg-[#8fbf38] transition">Daftar</a>
                     @endif

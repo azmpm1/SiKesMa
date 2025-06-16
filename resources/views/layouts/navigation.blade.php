@@ -9,7 +9,7 @@
                 </div>
 
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="#" class="hover:text-gray-300 text-xl">Ambil Antrian</a>
+                    <a href="{{ route('antrian.create') }}" class="hover:text-gray-300 text-xl">Ambil Antrian</a>
                     <a href="#" class="hover:text-gray-300 text-xl">Profil Dokter</a>
                     <a href="#" class="hover:text-gray-300 text-xl">Ambulance</a>
                     <a href="#" class="hover:text-gray-300 text-xl">Artikel Kesehatan</a>
@@ -61,10 +61,7 @@
 
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="'#'" :active="false">
+            <x-responsive-nav-link :href="route('antrian.create')" :active="request()->routeIs('antrian.create')">
                 {{ __('Ambil Antrian') }}
             </x-responsive-nav-link>
             <x-responsive-nav-link :href="'#'" :active="false">

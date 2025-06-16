@@ -1,11 +1,4 @@
-<x-app-layout>
-    {{-- Hapus Slot Header Bawaan agar tidak ada judul "Dashboard" ganda --}}
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-    </x-slot> --}}
-
+<x-app-layout :title="__('Dashboard')">
     @php
         // Ganti 'hero-bg.jpg' dengan nama file gambar hero Anda jika berbeda
         $heroStyle = "background-image: url(" . asset('images/image_2.jpg') . "); background-size: cover; background-position: center;";
