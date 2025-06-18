@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin', // Penanda admin
         'nik',
         'tanggal_lahir',
         'jenis_kelamin',
@@ -28,15 +29,7 @@ class User extends Authenticatable
         'no_telp',
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
+    // ... (kode lain yang sudah ada) ...
 
     /**
      * Get the attributes that should be cast.
@@ -48,6 +41,17 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean', // Tambahkan ini agar is_admin selalu boolean (true/false)
         ];
+    }
+    
+    /**
+     * Mengecek apakah pengguna adalah admin.
+     *
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return $this->is_admin;
     }
 }

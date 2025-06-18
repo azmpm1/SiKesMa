@@ -28,8 +28,24 @@ class AntrianController extends Controller
             'metode_pembayaran' => ['required', 'string'],
         ]);
 
-        Antrian::create($request->all());
+        $antrian = Antrian::create($request->all());
 
-        return redirect()->route('dashboard')->with('status', 'Antrian berhasil dibuat!');
+        // Alihkan ke route 'antrian.show' dengan membawa ID antrian baru
+        return redirect()->route('antrian.show', $antrian);
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(Antrian $antrian)
+    {
+        // Logika untuk menentukan jam, untuk sementara kita buat acak
+        // Di aplikasi nyata, ini bisa lebih kompleks (misal: berdasarkan jumlah antrian)
+        $jam = '09:' . str_pad(rand(0, 59), 2, '0', STR_PAD_LEFT);
+
+        return view('antrian.show', [
+            'antrian' => $antrian,
+            'jam' => $jam
+        ]);
     }
 }

@@ -4,10 +4,12 @@
         $heroStyle = "background-image: url(" . asset('images/image_2.jpg') . "); background-size: cover; background-position: center;";
     @endphp
     <section class="relative text-white h-[94vh] flex items-center" style="{!! $heroStyle !!}">
-        <div class="absolute inset-0 bg-black opacity-50"></div>
-        <div class="relative w-full px-20 text-white">
-            <h1 class="text-6xl md:text-6xl font-bold leading-tight">SiKesMa - <br />Sistem Kesehatan Masyarakat</h1>
-            <p class="mt-4 text-xl">“Solusi Kesehatan Digital Terdepan”</p>
+        <div class="absolute inset-0"></div>
+        <div class="relative w-full px-20 text-black">
+            <div class="max-w-xl">
+                <h1 class="text-6xl md:text-7xl font-bold leading-tight">SiKesMa - <br />Sistem Kesehatan Masyarakat</h1>
+                <p class="mt-4 text-xl">“Solusi Kesehatan Digital Terdepan”</p>
+            </div>
         </div>
     </section>
 
@@ -52,9 +54,4 @@
 
         </div>
     </div>
-
-    <footer class="bg-[#4a773b] text-white text-center py-20 text-xl">
-        <p>&copy; 2025 SiKesMa. Seluruh hak cipta dilindungi.</p>
-    </footer>
-
 </x-app-layout>

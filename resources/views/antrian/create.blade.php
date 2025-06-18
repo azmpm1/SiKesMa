@@ -1,20 +1,10 @@
 <x-app-layout :title="__('Ambil Antrian')">
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="max-w-3xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-lg sm:rounded-3xl">
                 <div class="p-6 bg-white border-b border-gray-200">
-                    <h2 class="text-2xl font-bold text-center mb-4">Ambil Antrian</h2>
-                    <p class="text-center text-gray-600 mb-8">Daftar antrian pemeriksaan di puskesmas secara online tanpa perlu datang lebih awal.</p>
-                    
-                    @if ($errors->any())
-                        <div class="mb-4">
-                            <ul class="list-disc list-inside text-sm text-red-600">
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endif
+                    <h2 class="text-2xl font-bold text-center">Ambil Antrian</h2>
+                    <p class="text-center mt-1 text-gray-600 mb-8 border-b pb-6">Daftar antrian pemeriksaan di puskesmas secara online tanpa perlu datang lebih awal.</p>
 
                     <form action="{{ route('antrian.store') }}" method="POST">
                         @csrf
