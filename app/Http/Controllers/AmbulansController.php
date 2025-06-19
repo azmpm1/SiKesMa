@@ -5,16 +5,21 @@ namespace App\Http\Controllers;
 use App\Models\PanggilanAmbulans;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class AmbulansController extends Controller
 {
-    // Menampilkan formulir panggilan ambulans
+    /**
+     * Menampilkan formulir panggilan ambulans
+     */
     public function create()
     {
         return view('ambulans.create');
     }
 
-    // Menyimpan data dari formulir
+    /**
+     * Menyimpan data dari formulir dan mengarahkan ke halaman detail (show)
+     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -25,15 +30,27 @@ class AmbulansController extends Controller
             'riwayat_penyakit' => ['required', 'string'],
             'tingkat_urgensi' => ['required', Rule::in(['tinggi', 'sedang', 'rendah'])],
         ]);
+        
+        $dataToCreate = array_merge($validatedData, ['user_id' => Auth::id()]);
 
-        PanggilanAmbulans::create($validatedData);
+        $panggilan = PanggilanAmbulans::create($dataToCreate);
 
-        return redirect()->route('ambulans.success');
+        // UBAH REDIRECT: Arahkan ke route 'ambulans.show' dengan membawa data panggilan baru
+        return redirect()->route('ambulans.show', $panggilan);
     }
 
-    // Menampilkan halaman sukses setelah panggilan terkirim
-    public function success()
+    /**
+     * METHOD BARU: Menampilkan detail konfirmasi panggilan ambulans
+     */
+    public function show(PanggilanAmbulans $panggilanAmbulans)
     {
-        return view('ambulans.success');
+        // Pastikan hanya user yang membuat panggilan yang bisa melihat detailnya
+        if ($panggilanAmbulans->user_id !== Auth::id()) {
+            abort(403, 'AKSES DITOLAK');
+        }
+
+        return view('ambulans.show', [
+            'panggilan' => $panggilanAmbulans
+        ]);
     }
 }

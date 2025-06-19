@@ -8,14 +8,13 @@
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
+    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="font-sans antialiased bg-[#e6f4ea] text-gray-800">
     <nav class="bg-[#4a773b] text-white shadow-md sticky top-0 z-50">
         <div class="w-full px-20 py-4 flex justify-between items-center">
-
             <a href="/" class="text-4xl font-bold">SiKesMa</a>
 
             <div class="hidden md:flex items-center space-x-6">
@@ -32,24 +31,11 @@
                         class="border border-white text-lg font-medium py-2 px-3 rounded-lg leading-4 hover:bg-white hover:text-[#4a773b] transition">Masuk</a>
                 @endif
             </div>
-
-            <div class="md:hidden">
-                <button class="text-white focus:outline-none">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
-            </div>
         </div>
     </nav>
+
     @php
-        // Menyiapkan style untuk background agar lebih rapi
-        $heroStyle =
-            'background-image: url(' .
-            asset('images/image_2.jpg') .
-            '); background-size: cover; background-position: center;';
+        $heroStyle = 'background-image: url(' . asset('images/image_2.jpg') . '); background-size: cover; background-position: center;';
     @endphp
 
     <section class="relative text-black h-[92vh] flex items-center" style="{!! $heroStyle !!}">
@@ -57,73 +43,74 @@
 
         <div class="relative w-full px-20">
             <div class="max-w-xl">
-                <h1 class="text-6xl md:text-7xl font-bold leading-tight">SiKesMa - <br />Sistem Kesehatan Masyarakat
-                </h1>
-                <p class="mt-4 text-xl">“Solusi Kesehatan Digital Terdepan”</p>
+                <h1 class="text-6xl md:text-7xl font-bold leading-tight">SiKesMa - <br />Sistem Kesehatan Masyarakat</h1>
+                <p class="mt-4 text-xl">Solusi layanan kesehatan masyarakat secara online dan efisien, tanpa antre panjang.</p>
                 @if (Route::has('register'))
                     <a href="{{ route('register') }}"
                         class="mt-8 inline-block bg-[#4a773b] text-xl text-white font-bold py-3 px-6 rounded-xl hover:bg-[#3e6431] transition">
-                        Daftar Sebagai Pengguna
+                        Daftar Sekarang
                     </a>
                 @endif
             </div>
         </div>
     </section>
 
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <section class="mb-16">
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold mb-10 text-gray-800">Layanan Publik</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <a href="{{ route('login') }}"
-                            class="block bg-[#4a773b] text-white font-bold py-8 px-4 rounded-xl shadow-lg hover:bg-green-800 hover:scale-105 transform transition">Ambil
-                            Antrian Online</a>
-                        <a href="{{ route('login') }}"
-                            class="block bg-[#4a773b] text-white font-bold py-8 px-4 rounded-xl shadow-lg hover:bg-green-800 hover:scale-105 transform transition">Panggilan
-                            Darurat Ambulance</a>
-                        <a href="{{ route('login') }}"
-                            class="block bg-[#4a773b] text-white font-bold py-8 px-4 rounded-xl shadow-lg hover:bg-green-800 hover:scale-105 transform transition">Profil
-                            Dokter</a>
-                        <a href="{{ route('login') }}"
-                            class="block bg-[#4a773b] text-white font-bold py-8 px-4 rounded-xl shadow-lg hover:bg-green-800 hover:scale-105 transform transition">Artikel
-                            Kesehatan</a>
-                    </div>
+    <div class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Kenapa Memilih SiKesMa?</h2>
+                <p class="mt-4 text-lg text-gray-600">Berikut fitur-fitur unggulan yang dapat Anda manfaatkan</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-[#e6f4ea] rounded-xl shadow-lg p-6 text-center">
+                    <box-icon name='edit-alt' type='solid' color='#4a773b' size='lg'></box-icon>
+                    <h3 class="text-xl font-semibold mt-4 mb-2">Ambil Antrian Online</h3>
+                    <p class="text-gray-700">Cegah antrean panjang dengan reservasi antrian dari rumah.</p>
                 </div>
-            </section>
-
-            <section>
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold mb-10 text-gray-800">Artikel Kesehatan</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                            <img src="{{ asset('images/image_6.png') }}" alt="Artikel 1"
-                                class="w-full h-48 object-cover" />
-                            <p class="p-4 font-semibold text-gray-700">“Sakit Perut Setelah Makan?” Waspadai Diare
-                                Akibat Infeksi</p>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                            <img src="{{ asset('images/image_3.png') }}" alt="Artikel 2"
-                                class="w-full h-48 object-cover" />
-                            <p class="p-4 font-semibold text-gray-700">“Sering Pusing dan Lelah?” Bisa Jadi Hipertensi
-                                Tanpa Disadari</p>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                            <img src="{{ asset('images/image_4.png') }}" alt="Artikel 3"
-                                class="w-full h-48 object-cover" />
-                            <p class="p-4 font-semibold text-gray-700">"Demam Tinggi Mendadak?" Jangan Anggap Sepele,
-                                Bisa Jadi DBD</p>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                            <img src="{{ asset('images/image_5.png') }}" alt="Artikel 4"
-                                class="w-full h-48 object-cover" />
-                            <p class="p-4 font-semibold text-gray-700">“Gatal Terus di Lipatan Kulit?” Bisa Jadi Infeksi
-                                Jamur Kulit!</p>
-                        </div>
-                    </div>
+                <div class="bg-[#e6f4ea] rounded-xl shadow-lg p-6 text-center">
+                    <box-icon name='ambulance' type='solid' color='#4a773b' size='lg'></box-icon>
+                    <h3 class="text-xl font-semibold mt-4 mb-2">Panggilan Ambulans</h3>
+                    <p class="text-gray-700">Layanan darurat cepat hanya dalam beberapa klik.</p>
                 </div>
-            </section>
+                <div class="bg-[#e6f4ea] rounded-xl shadow-lg p-6 text-center">
+                    <box-icon name='user' type='solid' color='#4a773b' size='lg'></box-icon>
+                    <h3 class="text-xl font-semibold mt-4 mb-2">Profil Dokter</h3>
+                    <p class="text-gray-700">Lihat informasi dokter yang tersedia dan keahliannya.</p>
+                </div>
+                <div class="bg-[#e6f4ea] rounded-xl shadow-lg p-6 text-center">
+                    <box-icon name='book' type='solid' color='#4a773b' size='lg'></box-icon>
+                    <h3 class="text-xl font-semibold mt-4 mb-2">Artikel Kesehatan</h3>
+                    <p class="text-gray-700">Dapatkan edukasi dan informasi medis terpercaya.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="py-20 bg-[#e6f4ea]">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-bold text-gray-800 mb-10">Apa Kata Mereka?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white shadow-lg rounded-xl p-6">
+                    <p class="text-gray-700 italic">“Pelayanannya cepat dan sistemnya sangat membantu. Tidak perlu antre lama lagi.”</p>
+                    <div class="mt-4 font-semibold">Budi, Nganjuk</div>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6">
+                    <p class="text-gray-700 italic">“Saya merasa lebih aman karena bisa memanggil ambulans hanya dengan beberapa klik.”</p>
+                    <div class="mt-4 font-semibold">Siti, Kertosono</div>
+                </div>
+                <div class="bg-white shadow-lg rounded-lg p-6">
+                    <p class="text-gray-700 italic">“Sangat membantu, terutama bagi lansia. Semoga terus dikembangkan.”</p>
+                    <div class="mt-4 font-semibold">Pak Rudi, Pace</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-[#4a773b] text-white py-10">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h3 class="text-2xl font-bold">SiKesMa - Sistem Kesehatan Masyarakat</h3>
+            <p class="mt-2">Aplikasi pelayanan kesehatan berbasis digital untuk mempermudah akses masyarakat terhadap layanan kesehatan.</p>
+            <p class="mt-2 text-sm">&copy; 2025 SiKesMa. All rights reserved.</p>
         </div>
     </div>
 </body>

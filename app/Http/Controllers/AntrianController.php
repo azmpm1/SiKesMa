@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Antrian;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class AntrianController extends Controller
 {
     /**
-     * Show the form for creating a new resource.
+     * METHOD YANG HILANG: Menampilkan formulir untuk membuat antrian.
      */
     public function create()
     {
@@ -16,11 +18,11 @@ class AntrianController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Menyimpan data antrian baru.
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'nik' => ['required', 'string', 'digits:16'],
             'poli' => ['required', 'string'],
             'keluhan' => ['required', 'string'],
@@ -28,20 +30,45 @@ class AntrianController extends Controller
             'metode_pembayaran' => ['required', 'string'],
         ]);
 
-        $antrian = Antrian::create($request->all());
+        $dataToCreate = array_merge($validatedData, ['user_id' => Auth::id()]);
 
-        // Alihkan ke route 'antrian.show' dengan membawa ID antrian baru
+        $antrian = Antrian::create($dataToCreate);
+
         return redirect()->route('antrian.show', $antrian);
     }
 
+
     /**
-     * Display the specified resource.
+     * Menampilkan detail tiket antrian.
      */
+
     public function show(Antrian $antrian)
     {
-        // Logika untuk menentukan jam, untuk sementara kita buat acak
-        // Di aplikasi nyata, ini bisa lebih kompleks (misal: berdasarkan jumlah antrian)
-        $jam = '09:' . str_pad(rand(0, 59), 2, '0', STR_PAD_LEFT);
+        // =======================================================
+        // BLOK KODE UNTUK KEAMANAN (SUDAH ADA)
+        // =======================================================
+        // Pastikan hanya user yang membuat antrian ATAU admin yang bisa melihat detailnya
+        if (Auth::id() !== $antrian->user_id && !Auth::user()->isAdmin()) {
+            abort(403, 'AKSES DITOLAK');
+        }
+        // =======================================================
+
+        // --- Logika untuk estimasi jam ---
+        $jumlahAntrianSebelumnya = Antrian::where('tanggal_periksa', $antrian->tanggal_periksa)
+            ->where('poli', $antrian->poli)
+            ->where('id', '<', $antrian->id)
+            ->count();
+
+        $durasiPerPasien = 15;
+        $waktuBuka = Carbon::createFromFormat('Y-m-d H:i', $antrian->tanggal_periksa . ' 08:00');
+        $estimasiJam = $waktuBuka->addMinutes($jumlahAntrianSebelumnya * $durasiPerPasien);
+
+        $mulaiIstirahat = Carbon::createFromFormat('Y-m-d H:i', $antrian->tanggal_periksa . ' 12:00');
+        if ($estimasiJam->gte($mulaiIstirahat)) {
+            $estimasiJam->addHour();
+        }
+
+        $jam = $estimasiJam->format('H:i');
 
         return view('antrian.show', [
             'antrian' => $antrian,

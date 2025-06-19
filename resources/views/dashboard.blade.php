@@ -1,57 +1,115 @@
-<x-app-layout :title="__('Dashboard')">
-    @php
-        // Ganti 'hero-bg.jpg' dengan nama file gambar hero Anda jika berbeda
-        $heroStyle = "background-image: url(" . asset('images/image_2.jpg') . "); background-size: cover; background-position: center;";
-    @endphp
-    <section class="relative text-white h-[94vh] flex items-center" style="{!! $heroStyle !!}">
-        <div class="absolute inset-0"></div>
-        <div class="relative w-full px-20 text-black">
-            <div class="max-w-xl">
-                <h1 class="text-6xl md:text-7xl font-bold leading-tight">SiKesMa - <br />Sistem Kesehatan Masyarakat</h1>
-                <p class="mt-4 text-xl">“Solusi Kesehatan Digital Terdepan”</p>
+<x-app-layout>
+    <div class="py-12 px-4 sm:px-10 md:px-20">
+        <div class="mb-8">
+            <h1 class="text-2xl md:text-3xl font-bold text-gray-800">Selamat Datang Kembali, {{ Auth::user()->name }}!
+            </h1>
+            <p class="text-gray-500">Berikut adalah ringkasan aktivitas kesehatan Anda.</p>
+        </div>
+
+        <div class="bg-white overflow-hidden shadow-lg sm:rounded-2xl">
+            <div class="p-6 text-gray-900">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Riwayat Antrian Terakhir</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase">No. Antrian
+                                </th>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase">Poli</th>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase">Tgl Periksa
+                                </th>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase">Jam</th>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase">Keluhan</th>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            @forelse ($riwayatAntrian as $antrian)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-bold">{{ $antrian->id }}</td>
+                                    <td class="py-3 px-4">{{ $antrian->poli }}</td>
+                                    <td class="py-3 px-4">
+                                        {{ \Carbon\Carbon::parse($antrian->tanggal_periksa)->translatedFormat('d M Y') }}
+                                    </td>
+                                    <td class="py-3 px-4">{{ $antrian->estimasi_jam }} WIB</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">{{ Str::limit($antrian->keluhan, 40) }}
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <a href="{{ route('antrian.show', $antrian->id) }}"
+                                            class="px-3 py-1 bg-green-500 text-white rounded-md text-sm hover:bg-green-600">
+                                            Lihat Detail
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center py-6 text-gray-500">Belum ada riwayat antrian.
+                                    </td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
-    </section>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
-            <section class="mb-16">
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold mb-10 text-gray-800">Layanan Publik</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <a href="#" class="block bg-[#4a773b] text-white font-bold py-8 px-4 rounded-xl shadow-lg hover:bg-green-800 hover:scale-105 transform transition">Ambil Antrian Online</a>
-                        <a href="#" class="block bg-[#4a773b] text-white font-bold py-8 px-4 rounded-xl shadow-lg hover:bg-green-800 hover:scale-105 transform transition">Panggilan Darurat Ambulance</a>
-                        <a href="#" class="block bg-[#4a773b] text-white font-bold py-8 px-4 rounded-xl shadow-lg hover:bg-green-800 hover:scale-105 transform transition">Profil Dokter</a>
-                        <a href="#" class="block bg-[#4a773b] text-white font-bold py-8 px-4 rounded-xl shadow-lg hover:bg-green-800 hover:scale-105 transform transition">Artikel Kesehatan</a>
-                    </div>
+        <div class="mt-8 bg-white overflow-hidden shadow-lg sm:rounded-2xl">
+            <div class="p-6 text-gray-900">
+                <h3 class="text-xl font-bold text-gray-800 mb-4">Riwayat Panggilan Ambulans</h3>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full bg-white">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase">No</th>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase">Tgl
+                                    Panggilan</th>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase">Jam</th>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase">Keluhan</th>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase">Tingkat
+                                    Urgensi</th>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-gray-500 uppercase">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                            @forelse ($riwayatAmbulans as $panggilan)
+                                <tr class="hover:bg-gray-50">
+                                    <td class="py-3 px-4 font-bold">{{ $panggilan->id }}</td>
+                                    <td class="py-3 px-4">{{ $panggilan->created_at->translatedFormat('d M Y, H:i') }}
+                                    </td>
+                                    <td class="py-3 px-4">{{ $panggilan->created_at->format('H:i') }} WIB</td>
+                                    <td class="py-3 px-4 text-sm text-gray-600">
+                                        {{ Str::limit($panggilan->keluhan_utama, 50) }}</td>
+                                    <td class="py-3 px-4">
+                                        @php
+                                            $urgensiClass =
+                                                $panggilan->tingkat_urgensi == 'tinggi'
+                                                    ? 'bg-red-100 text-red-800'
+                                                    : ($panggilan->tingkat_urgensi == 'sedang'
+                                                        ? 'bg-yellow-100 text-yellow-800'
+                                                        : 'bg-blue-100 text-blue-800');
+                                        @endphp
+                                        <span
+                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $urgensiClass }}">
+                                            {{ ucfirst($panggilan->tingkat_urgensi) }}
+                                        </span>
+                                    </td>
+                                    <td class="py-3 px-4">
+                                        <a href="{{ route('ambulans.show', $panggilan->id) }}"
+                                            class="px-3 py-1 bg-red-500 text-white rounded-md text-sm hover:bg-red-600">
+                                            Lihat Detail
+                                        </a>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-center py-6 text-gray-500">Belum ada riwayat
+                                        panggilan ambulans.</td>
+                                </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
-            </section>
-
-            <section>
-                <div class="text-center">
-                    <h2 class="text-3xl font-bold mb-10 text-gray-800">Artikel Kesehatan</h2>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                            <img src="{{ asset('images/image_6.png') }}" alt="Artikel 1" class="w-full h-48 object-cover" />
-                            <p class="p-4 font-semibold text-gray-700">“Sakit Perut Setelah Makan?” Waspadai Diare Akibat Infeksi</p>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                            <img src="{{ asset('images/image_3.png') }}" alt="Artikel 2" class="w-full h-48 object-cover" />
-                            <p class="p-4 font-semibold text-gray-700">“Sering Pusing dan Lelah?” Bisa Jadi Hipertensi Tanpa Disadari</p>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                            <img src="{{ asset('images/image_4.png') }}" alt="Artikel 3" class="w-full h-48 object-cover" />
-                            <p class="p-4 font-semibold text-gray-700">"Demam Tinggi Mendadak?" Jangan Anggap Sepele, Bisa Jadi DBD</p>
-                        </div>
-                        <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-                            <img src="{{ asset('images/image_5.png') }}" alt="Artikel 4" class="w-full h-48 object-cover" />
-                            <p class="p-4 font-semibold text-gray-700">“Gatal Terus di Lipatan Kulit?” Bisa Jadi Infeksi Jamur Kulit!</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
+            </div>
         </div>
     </div>
 </x-app-layout>

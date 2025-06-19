@@ -12,6 +12,7 @@ class PanggilanAmbulans extends Model
     protected $table = 'panggilan_ambulans';
 
     protected $fillable = [
+        'user_id', // Tambahkan ini
         'nama',
         'no_telepon',
         'alamat',
@@ -19,4 +20,9 @@ class PanggilanAmbulans extends Model
         'riwayat_penyakit',
         'tingkat_urgensi',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

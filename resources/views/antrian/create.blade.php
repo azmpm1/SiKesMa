@@ -11,7 +11,7 @@
                         <div class="grid grid-cols-1 gap-6">
                             <div>
                                 <x-input-label for="nik" :value="__('NIK')" />
-                                <x-text-input id="nik" class="block mt-1 w-full" type="text" name="nik" :value="old('nik')" required />
+                                <x-text-input id="nik" class="block mt-1 w-full" type="text" name="nik" :value="old('nik', auth()->user()->nik)" required />
                             </div>
 
                             <div>

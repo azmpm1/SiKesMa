@@ -69,11 +69,11 @@
                                         </span>
                                     </td>
                                     <td class="py-4 px-6 whitespace-nowrap flex items-center space-x-2">
-                                        <a href="{{ route('admin.ambulans.edit', $panggilan->id) }}" class="px-3 py-1 bg-blue-500 text-white rounded-md text-xs hover:bg-blue-600 shadow">Edit</a>
+                                        <a href="{{ route('admin.ambulans.edit', $panggilan->id) }}" class="px-3 py-1 bg-blue-500 text-white rounded-md text-sm hover:bg-blue-600 shadow">Edit</a>
                                         <form action="{{ route('admin.ambulans.destroy', $panggilan->id) }}" method="POST" onsubmit="return confirm('Anda yakin ingin menghapus data ini?');">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded-md text-xs hover:bg-red-600 shadow">Hapus</button>
+                                            <button type="submit" class="px-3 py-1 bg-red-500 text-white rounded-md text-sm hover:bg-red-600 shadow">Hapus</button>
                                         </form>
                                     </td>
                                 </tr>

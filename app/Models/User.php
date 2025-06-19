@@ -30,6 +30,15 @@ class User extends Authenticatable
     ];
 
     // ... (kode lain yang sudah ada) ...
+    public function antrians()
+    {
+        return $this->hasMany(Antrian::class);
+    }
+
+    public function panggilanAmbulans()
+    {
+        return $this->hasMany(PanggilanAmbulans::class);
+    }
 
     /**
      * Get the attributes that should be cast.

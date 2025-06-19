@@ -1,14 +1,14 @@
 <x-app-layout>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-[#e6f4ea]">
                 <div class="p-6 md:p-12 text-gray-900 text-center">
 
                     <h1 class="text-3xl font-bold text-gray-800">Selamat!</h1>
                     <p class="text-lg text-gray-600 mt-2 mb-8">Antrian Anda Berhasil Ditambahkan</p>
 
                     {{-- Card Tiket Antrian dengan gaya Tailwind --}}
-                    <div class="bg-gray-50 border-2 border-green-600 rounded-xl max-w-md mx-auto p-6 text-left shadow-md">
+                    <div class="bg-gray-50 rounded-2xl max-w-md mx-auto p-6 text-left shadow-lg">
                         
                         <div class="space-y-4">
                             <div class="flex justify-between items-center">
@@ -50,7 +50,7 @@
 
                     {{-- Tombol Kembali --}}
                     <div class="mt-8 flex justify-center">
-                        <a href="{{ route('dashboard') }}" class="inline-flex items-center px-6 py-3 bg-[#4a773b] border border-transparent rounded-md font-semibold text-white uppercase tracking-widest hover:bg-[#3e6431] focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        <a href="{{ route('dashboard') }}" class="inline-flex items-center px-6 py-3 bg-green-600 border border-transparent rounded-md font-semibold text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-800 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
                             Kembali ke Dashboard
                         </a>
                     </div>

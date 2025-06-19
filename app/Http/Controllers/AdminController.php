@@ -14,7 +14,7 @@ class AdminController extends Controller
     {
         // Data untuk tiga kartu di atas (tidak berubah)
         $jumlahPengguna = User::count();
-        $antrianHariIni = Antrian::whereDate('created_at', Carbon::today())->count();
+        $antrianHariIni = Antrian::whereDate('tanggal_periksa', Carbon::today())->count();
         $panggilanAmbulansHariIni = PanggilanAmbulans::whereDate('created_at', Carbon::today())->count();
 
         // --- LOGIKA BARU UNTUK LOG AKTIVITAS ---
