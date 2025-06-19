@@ -38,7 +38,7 @@
                             <tr>
                                 <th
                                     class="py-4 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                    No.</th>
+                                    No. Harian</th>
                                 <th
                                     class="py-4 px-6 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                     NIK</th>
@@ -62,7 +62,7 @@
                         <tbody class="divide-y divide-gray-200">
                             @forelse ($antrians as $index => $antrian)
                                 <tr class="hover:bg-gray-50">
-                                    <td class="py-4 px-6 whitespace-nowrap">{{ $antrians->firstItem() + $index }}</td>
+                                    <td class="py-4 px-6 whitespace-nowrap">{{ $antrian->nomor_antrian_harian }}</td>
                                     <td class="py-4 px-6 whitespace-nowrap">{{ $antrian->nik }}</td>
                                     <td class="py-4 px-6 whitespace-nowrap">{{ $antrian->poli }}</td>
                                     <td class="py-4 px-6 max-w-xs truncate">{{ $antrian->keluhan }}</td>

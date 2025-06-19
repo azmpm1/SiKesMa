@@ -26,7 +26,7 @@
                         <tbody class="divide-y divide-gray-200">
                             @forelse ($riwayatAntrian as $antrian)
                                 <tr class="hover:bg-gray-50">
-                                    <td class="py-3 px-4 font-bold">{{ $antrian->id }}</td>
+                                    <td class="py-3 px-4 font-bold">{{ $antrian->nomor_antrian_harian }}</td>
                                     <td class="py-3 px-4">{{ $antrian->poli }}</td>
                                     <td class="py-3 px-4">
                                         {{ \Carbon\Carbon::parse($antrian->tanggal_periksa)->translatedFormat('d M Y') }}

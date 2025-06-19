@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Carbon\Carbon; // <-- TAMBAHKAN INI
+use Carbon\Carbon;
 
 class Antrian extends Model
 {
@@ -12,6 +12,7 @@ class Antrian extends Model
 
     protected $fillable = [
         'user_id',
+        'nomor_antrian_harian', // <-- TAMBAHKAN INI
         'nik',
         'poli',
         'keluhan',
@@ -25,32 +26,23 @@ class Antrian extends Model
     }
     
     /**
-     * METHOD BARU (ACCESSOR): Untuk menghitung estimasi jam periksa.
+     * Accessor untuk menghitung estimasi jam periksa.
+     * LOGIKANYA KITA PERBARUI DI SINI
      */
     public function getEstimasiJamAttribute(): string
     {
-        // Hitung jumlah antrian sebelumnya pada hari dan poli yang sama
-        $jumlahAntrianSebelumnya = self::where('tanggal_periksa', $this->tanggal_periksa)
-            ->where('poli', $this->poli)
-            ->where('id', '<', $this->id)
-            ->count();
+        // Jumlah antrian sebelumnya adalah nomor harian dikurangi 1
+        $jumlahAntrianSebelumnya = $this->nomor_antrian_harian - 1;
 
-        // Tentukan durasi per pasien dalam menit
         $durasiPerPasien = 15; 
-        
-        // Waktu mulai pelayanan
         $waktuBuka = Carbon::createFromFormat('Y-m-d H:i', $this->tanggal_periksa . ' 08:00');
-
-        // Hitung estimasi waktu
         $estimasiJam = $waktuBuka->addMinutes($jumlahAntrianSebelumnya * $durasiPerPasien);
 
-        // Logika untuk jam istirahat (12:00 - 13:00)
         $mulaiIstirahat = Carbon::createFromFormat('Y-m-d H:i', $this->tanggal_periksa . ' 12:00');
         if ($estimasiJam->gte($mulaiIstirahat)) {
-            $estimasiJam->addHour(); // Tambah 1 jam jika melewati atau sama dengan jam 12
+            $estimasiJam->addHour();
         }
 
-        // Format jam menjadi "HH:MM"
         return $estimasiJam->format('H:i');
     }
 }

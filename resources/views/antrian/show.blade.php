@@ -9,13 +9,17 @@
 
                     {{-- Card Tiket Antrian dengan gaya Tailwind --}}
                     <div class="bg-gray-50 rounded-2xl max-w-md mx-auto p-6 text-left shadow-lg">
-                        
+
                         <div class="space-y-4">
                             <div class="flex justify-between items-center">
                                 <span class="font-bold text-gray-700">Nomor Antrian</span>
-                                <span class="font-mono text-lg bg-green-200 text-green-800 font-bold px-3 py-1 rounded-md">{{ $antrian->id }}</span>
+                                <span
+                                    class="font-mono text-lg bg-green-200 text-green-800 font-bold px-3 py-1 rounded-md">
+                                    {{-- Menjadi G-1, U-5, dll. --}}
+                                    {{ substr($antrian->poli, 0, 1) }}-{{ $antrian->nomor_antrian_harian }}
+                                </span>
                             </div>
-                            
+
                             <hr>
 
                             <div class="flex justify-between items-center">
@@ -43,14 +47,16 @@
 
                         <div class="mt-6 pt-4 border-t border-gray-300">
                             <p class="text-sm text-gray-600">
-                                <span class="font-bold">Catatan:</span> Silahkan datang 15 menit sebelum waktu yang ditentukan dan bawa dokumen yang diperlukan.
+                                <span class="font-bold">Catatan:</span> Silahkan datang 15 menit sebelum waktu yang
+                                ditentukan dan bawa dokumen yang diperlukan.
                             </p>
                         </div>
                     </div>
 
                     {{-- Tombol Kembali --}}
                     <div class="mt-8 flex justify-center">
-                        <a href="{{ route('dashboard') }}" class="inline-flex items-center px-6 py-3 bg-green-600 border border-transparent rounded-md font-semibold text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-800 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                        <a href="{{ route('dashboard') }}"
+                            class="inline-flex items-center px-6 py-3 bg-green-600 border border-transparent rounded-md font-semibold text-white uppercase tracking-widest hover:bg-green-700 focus:bg-green-700 active:bg-green-800 focus:ring-green-500 focus:ring-offset-2 transition ease-in-out duration-150">
                             Kembali ke Dashboard
                         </a>
                     </div>

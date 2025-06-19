@@ -29,14 +29,14 @@ class AntrianController extends Controller
         // Siapkan label (tanggal) dan data (jumlah) untuk 7 hari
         $chartLabels = [];
         $chartData = [];
-        for ($i = 6; $i >= 0; $i--) {
+        for ($i = 7; $i >= 0; $i--) { // <-- Diubah dari 6 menjadi 13
             $date = now()->subDays($i);
             $dateString = $date->format('Y-m-d');
-
-            // Format label menjadi "18 Jun"
+            
             $chartLabels[] = $date->translatedFormat('d M');
             $chartData[] = $stats[$dateString] ?? 0;
         }
+
 
 
         // --- LOGIKA UNTUK TABEL (tidak berubah) ---

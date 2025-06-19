@@ -30,7 +30,20 @@ class AntrianController extends Controller
             'metode_pembayaran' => ['required', 'string'],
         ]);
 
-        $dataToCreate = array_merge($validatedData, ['user_id' => Auth::id()]);
+        // --- LOGIKA BARU UNTUK NOMOR ANTRIAN HARIAN ---
+        // 1. Hitung berapa antrian yang sudah ada pada hari dan poli yang sama
+        $jumlahAntrianSaatIni = Antrian::where('tanggal_periksa', $validatedData['tanggal_periksa'])
+            ->where('poli', $validatedData['poli'])
+            ->count();
+
+        // 2. Nomor antrian baru adalah jumlah saat ini + 1
+        $nomorBaru = $jumlahAntrianSaatIni + 1;
+
+        // 3. Siapkan data untuk disimpan
+        $dataToCreate = array_merge($validatedData, [
+            'user_id' => Auth::id(),
+            'nomor_antrian_harian' => $nomorBaru
+        ]);
 
         $antrian = Antrian::create($dataToCreate);
 
