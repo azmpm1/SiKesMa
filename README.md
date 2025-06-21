@@ -7,6 +7,14 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
+## About Project
+
+**SiKesMa** adalah aplikasi kesehatan berbasis web yang dikembangkan sebagai bagian dari Final Project mata kuliah *Pemrograman Website*. Aplikasi ini dibangun menggunakan framework **Laravel**, dan berfungsi sebagai backend API serta sistem manajemen data pengguna. Proyek ini dikerjakan oleh mahasiswa Sistem Informasi, UPN "Veteran" Jawa Timur yang bernama:
+
+- Syahfi Rizki Yazid (23082010178)  
+- Ahmad Haris Insanul Kamil (23082010186)  
+- Ricky Widyadhana (23082010187)    
+
 ## About Laravel
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
